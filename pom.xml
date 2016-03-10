@@ -18,8 +18,7 @@
     <!-- = Properties = -->
     <!-- ============== -->
     <properties>
-        <nutch.version>2.3.1</nutch.version>
-        <nutch.download>http://apache.javapipe.com/nutch/${nutch.version}/apache-nutch-${nutch.version}-src.tar.gz</nutch.download>
+        <nutch.branch>gora-0.7-SNAPSHOT</nutch.branch>
     </properties>
 
     <!-- ================ -->
@@ -65,9 +64,9 @@
                 <configuration>
                     <goals>install</goals>
                     <connectionType>developerConnection</connectionType>
-                    <scmVersion>gora-0.7-SNAPSHOT</scmVersion>
+                    <scmVersion>${nutch.branch}</scmVersion>
                     <scmVersionType>branch</scmVersionType>
-                    <checkoutDirectory>${project.build.directory}/apache-nutch-${nutch.version}</checkoutDirectory>
+                    <checkoutDirectory>${project.build.directory}/apache-nutch-${nutch.branch}</checkoutDirectory>
                 </configuration>
             </plugin>
 
@@ -82,7 +81,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/apache-nutch-${nutch.version}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/apache-nutch-${nutch.branch}</outputDirectory>
                             <filters>
                                 <filter>src/filters/filter.properties</filter>
                             </filters>
@@ -116,20 +115,8 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
-                        <configuration>
-                            <tasks>
-                                <!---->
-                                <!--<echo message="Downloading nutch src archive at ${nutch.download}" />-->
-                                <!--<get src="${nutch.download}" dest="${project.build.directory}"/>-->
-                                <!--<echo message="Untar nutch archive apache-nutch-${nutch.version}-src.tar.gz"/>-->
-                                <!--<gunzip src="${project.build.directory}/apache-nutch-${nutch.version}-src.tar.gz"/>-->
-                                <!--<untar src="${project.build.directory}/apache-nutch-${nutch.version}-src.tar" dest="${project.build.directory}"/>-->
-                                <!---->
-
-
-                            </tasks>
-                        </configuration>
                     </execution>
+
                     <execution>
                         <id>compile</id>
                         <phase>compile</phase>
@@ -139,15 +126,15 @@
                         <configuration>
                             <tasks>
                                 <echo message="Compile nutch" />
-                                <copy todir="${project.build.directory}/apache-nutch-${nutch.version}/lib/">
+                                <copy todir="${project.build.directory}/apache-nutch-${nutch.branch}/lib/">
                                     <fileset dir="${project.basedir}/lib" >
                                         <include name="**/*.jar"/>
                                     </fileset>
                                 </copy>
-                                <ant antfile="${project.build.directory}/apache-nutch-${nutch.version}/build.xml" target="runtime"  dir="${project.build.directory}/apache-nutch-${nutch.version}">
+                                <ant antfile="${project.build.directory}/apache-nutch-${nutch.branch}/build.xml" target="runtime"  dir="${project.build.directory}/apache-nutch-${nutch.branch}">
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
-                                <move file="${project.build.directory}/apache-nutch-${nutch.version}/urls" todir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/" />
+                                <move file="${project.build.directory}/apache-nutch-${nutch.branch}/urls" todir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/" />
                             </tasks>
                         </configuration>
                     </execution>
@@ -160,8 +147,9 @@
                         <configuration>
                             <tasks>
                                 <echo message="Packaging" />
-                                <delete dir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/test"/>
-                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/"/>
+                                <delete dir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/test"/>
+                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/"/>
+                                <delete dir="${project.build.directory}/apache-nutch-${nutch.branch}"/>
                             </tasks>
                         </configuration>
                     </execution>

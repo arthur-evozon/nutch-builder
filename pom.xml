@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <packaging>pom</packaging>
+
+    <groupId>com.evozon</groupId>
+    <artifactId>nutch-crawl</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <scm>
+        <developerConnection>scm:git:git@github.com:arthur-evozon/nutch.git</developerConnection>
+    </scm>
+
+    <!-- ============== -->
+    <!-- = Properties = -->
+    <!-- ============== -->
+    <properties>
+        <nutch.version>2.3.1</nutch.version>
+        <nutch.download>http://apache.javapipe.com/nutch/${nutch.version}/apache-nutch-${nutch.version}-src.tar.gz</nutch.download>
+    </properties>
+
+    <!-- ================ -->
+    <!-- = Dependencies = -->
+    <!-- ================ -->
+    <dependencies>
+    </dependencies>
+
+    <!-- ========= -->
+    <!-- = Build = -->
+    <!-- ========= -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.4</version>
+                <executions>
+                    <execution>
+                        <id>dependency</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>checkout</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <goals>install</goals>
+                    <connectionType>developerConnection</connectionType>
+                    <scmVersion>gora-0.7-SNAPSHOT</scmVersion>
+                    <scmVersionType>branch</scmVersionType>
+                    <checkoutDirectory>${project.build.directory}/apache-nutch-${nutch.version}</checkoutDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/apache-nutch-${nutch.version}</outputDirectory>
+                            <filters>
+                                <filter>src/filters/filter.properties</filter>
+                            </filters>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <!-- Adding this so we can invoke javac in ant build's file-->
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun</groupId>
+                        <artifactId>tools</artifactId>
+                        <version>1.7</version>
+                        <scope>system</scope>
+                        <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>dependency</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <!---->
+                                <!--<echo message="Downloading nutch src archive at ${nutch.download}" />-->
+                                <!--<get src="${nutch.download}" dest="${project.build.directory}"/>-->
+                                <!--<echo message="Untar nutch archive apache-nutch-${nutch.version}-src.tar.gz"/>-->
+                                <!--<gunzip src="${project.build.directory}/apache-nutch-${nutch.version}-src.tar.gz"/>-->
+                                <!--<untar src="${project.build.directory}/apache-nutch-${nutch.version}-src.tar" dest="${project.build.directory}"/>-->
+                                <!---->
+
+
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="Compile nutch" />
+                                <copy todir="${project.build.directory}/apache-nutch-${nutch.version}/lib/">
+                                    <fileset dir="${project.basedir}/lib" >
+                                        <include name="**/*.jar"/>
+                                    </fileset>
+                                </copy>
+                                <ant antfile="${project.build.directory}/apache-nutch-${nutch.version}/build.xml" target="runtime"  dir="${project.build.directory}/apache-nutch-${nutch.version}">
+                                    <property name="final.name" value="${project.artifactId}"/>
+                                </ant>
+                                <move file="${project.build.directory}/apache-nutch-${nutch.version}/urls" todir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <echo message="Packaging" />
+                                <delete dir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/test"/>
+                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/apache-nutch-${nutch.version}/runtime/local/"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

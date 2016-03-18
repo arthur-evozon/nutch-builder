@@ -29,12 +29,6 @@
 
     </properties>
 
-    <!-- ================ -->
-    <!-- = Dependencies = -->
-    <!-- ================ -->
-    <dependencies>
-    </dependencies>
-
     <!-- ========= -->
     <!-- = Build = -->
     <!-- ========= -->
@@ -223,5 +217,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

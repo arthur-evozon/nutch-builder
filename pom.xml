@@ -10,13 +10,6 @@
     <artifactId>nutch-builder</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--
-    <scm>
-        <connection>>scm:git:git@github.com:arthur-evozon/gora.git</connection>
-        <developerConnection>scm:git:git@github.com:arthur-evozon/nutch.git</developerConnection>
-    </scm>
-    -->
-
     <!-- ============== -->
     <!-- = Properties = -->
     <!-- ============== -->
@@ -25,29 +18,13 @@
         <gora.branch>upgrade_hadoop-2.7.1_hbase-1.1.2_solr-4.10.3</gora.branch>
         <gora.version>0.7-SNAPSHOT</gora.version>
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
-        <nutch.branch>gora-0.7-SNAPSHOT</nutch.branch>
-
+        <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
     </properties>
 
     <!-- ========= -->
     <!-- = Build = -->
     <!-- ========= -->
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.7</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

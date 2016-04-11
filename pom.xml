@@ -17,10 +17,13 @@
         <gora.repo.url>scm:git:git@github.com:arthur-evozon/gora.git</gora.repo.url>
         <gora.branch>upgrade_hadoop-2.7.1_hbase-1.1.2_solr-4.10.3</gora.branch>
         <gora.version>0.7-SNAPSHOT</gora.version>
+        <gora.checkout.dir>apache-gora</gora.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
+
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
         <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
-        <product.parsers.common>apache-nutch-${nutch.branch}/src/product-parsers-common</product.parsers.common>
-        <product.parsers>apache-nutch-${nutch.branch}/src/product-parsers</product.parsers>
+        <nutch.checkout.dir>apache-nutch</nutch.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
+        <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
+        <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
     </properties>
 
     <!-- ========= -->
@@ -40,7 +43,7 @@
                             <connectionUrl>${gora.repo.url}</connectionUrl>
                             <scmVersion>${gora.branch}</scmVersion>
                             <scmVersionType>branch</scmVersionType>
-                            <checkoutDirectory>${project.build.directory}/apache-gora-${gora.branch}</checkoutDirectory>
+                            <checkoutDirectory>${project.build.directory}/${gora.checkout.dir}</checkoutDirectory>
                         </configuration>
                         <goals>
                             <goal>checkout</goal>
@@ -53,7 +56,7 @@
                             <connectionUrl>${nutch.repo.url}</connectionUrl>
                             <scmVersion>${nutch.branch}</scmVersion>
                             <scmVersionType>branch</scmVersionType>
-                            <checkoutDirectory>${project.build.directory}/apache-nutch-${nutch.branch}</checkoutDirectory>
+                            <checkoutDirectory>${project.build.directory}/${nutch.checkout.dir}</checkoutDirectory>
                         </configuration>
                         <goals>
                             <goal>checkout</goal>
@@ -73,7 +76,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/apache-nutch-${nutch.branch}/ivy</outputDirectory>
+                            <outputDirectory>${project.build.directory}/${nutch.checkout.dir}/ivy</outputDirectory>
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
@@ -98,7 +101,7 @@
                         </goals>
                         <configuration>
                             <executable>mvn</executable>
-                            <workingDirectory>${project.build.directory}/apache-gora-${gora.branch}</workingDirectory>
+                            <workingDirectory>${project.build.directory}/${gora.checkout.dir}</workingDirectory>
                             <arguments>
                                 <argument>-DskipTests</argument>
                                 <argument>clean</argument>
@@ -156,7 +159,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/apache-nutch-${nutch.branch}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/${nutch.checkout.dir}</outputDirectory>
                             <filters>
                                 <filter>src/filters/filter.properties</filter>
                             </filters>
@@ -201,15 +204,15 @@
                         <configuration>
                             <tasks>
                                 <echo message="Compile nutch" />
-                                <copy todir="${project.build.directory}/apache-nutch-${nutch.branch}/lib/">
+                                <copy todir="${project.build.directory}/${nutch.checkout.dir}/lib/">
                                     <fileset dir="${project.basedir}/lib" >
                                         <include name="**/*.jar"/>
                                     </fileset>
                                 </copy>
-                                <ant antfile="${project.build.directory}/apache-nutch-${nutch.branch}/build.xml" target="runtime"  dir="${project.build.directory}/apache-nutch-${nutch.branch}">
+                                <ant antfile="${project.build.directory}/${nutch.checkout.dir}/build.xml" target="runtime"  dir="${project.build.directory}/${nutch.checkout.dir}">
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
-                                <move file="${project.build.directory}/apache-nutch-${nutch.branch}/urls" todir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/" />
+                                <move file="${project.build.directory}/${nutch.checkout.dir}/urls" todir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/" />
                             </tasks>
                         </configuration>
                     </execution>
@@ -222,9 +225,9 @@
                         <configuration>
                             <tasks>
                                 <echo message="Packaging" />
-                                <delete dir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/test"/>
-                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/apache-nutch-${nutch.branch}/runtime/local/"/>
-                                <!--<delete dir="${project.build.directory}/apache-nutch-${nutch.branch}"/>-->
+                                <delete dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/test"/>
+                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/"/>
+                                <!--<delete dir="${project.build.directory}/${nutch.checkout.dir}"/>-->
                             </tasks>
                         </configuration>
                     </execution>

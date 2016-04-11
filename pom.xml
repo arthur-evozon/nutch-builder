@@ -19,6 +19,8 @@
         <gora.version>0.7-SNAPSHOT</gora.version>
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
         <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
+        <product.parsers.common>apache-nutch-${nutch.branch}/src/product-parsers-common</product.parsers.common>
+        <product.parsers>apache-nutch-${nutch.branch}/src/product-parsers</product.parsers>
     </properties>
 
     <!-- ========= -->
@@ -89,22 +91,58 @@
                 <version>1.4.0</version>
                 <executions>
                     <execution>
+                        <id>build-gora</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
+                        <configuration>
+                            <executable>mvn</executable>
+                            <workingDirectory>${project.build.directory}/apache-gora-${gora.branch}</workingDirectory>
+                            <arguments>
+                                <argument>-DskipTests</argument>
+                                <argument>clean</argument>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>build-${product.parsers.common}</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>mvn</executable>
+                            <workingDirectory>${project.build.directory}/${product.parsers.common}</workingDirectory>
+                            <arguments>
+                                <argument>-DskipTests</argument>
+                                <argument>clean</argument>
+                                <argument>package</argument>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>build-${product.parsers}</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>mvn</executable>
+                            <workingDirectory>${project.build.directory}/${product.parsers}</workingDirectory>
+                            <arguments>
+                                <argument>-DskipTests</argument>
+                                <argument>clean</argument>
+                                <argument>package</argument>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <executable>mvn</executable>
-                    <!-- optional -->
-                    <workingDirectory>${project.build.directory}/apache-gora-${gora.branch}</workingDirectory>
-                    <arguments>
-                        <argument>-DskipTests</argument>
-                        <argument>clean</argument>
-                        <argument>install</argument>
-                    </arguments>
-                </configuration>
             </plugin>
 
             <plugin>

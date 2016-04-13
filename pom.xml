@@ -203,12 +203,13 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <echo message="Compile nutch" />
+                                <echo message="Copy custom libraries" />
                                 <copy todir="${project.build.directory}/${nutch.checkout.dir}/lib/">
                                     <fileset dir="${project.basedir}/lib" >
                                         <include name="**/*.jar"/>
                                     </fileset>
                                 </copy>
+
                                 <ant antfile="${project.build.directory}/${nutch.checkout.dir}/build.xml" target="runtime"  dir="${project.build.directory}/${nutch.checkout.dir}">
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
@@ -226,6 +227,9 @@
                             <tasks>
                                 <echo message="Packaging" />
                                 <delete dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/test"/>
+                                <delete>
+                                    <fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="**/**-0.98.8-hadoop2.jar"/>
+                                </delete>
                                 <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/"/>
                                 <!--<delete dir="${project.build.directory}/${nutch.checkout.dir}"/>-->
                             </tasks>

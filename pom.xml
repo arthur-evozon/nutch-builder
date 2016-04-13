@@ -176,6 +176,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
                 <!-- Adding this so we can invoke javac in ant build's file-->
                 <dependencies>
                     <dependency>
@@ -202,19 +203,23 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
-                                <echo message="Copy custom libraries" />
+                            <target>
+                                <echo message="Building Nutch" />
                                 <copy todir="${project.build.directory}/${nutch.checkout.dir}/lib/">
                                     <fileset dir="${project.basedir}/lib" >
                                         <include name="**/*.jar"/>
                                     </fileset>
                                 </copy>
-
-                                <ant antfile="${project.build.directory}/${nutch.checkout.dir}/build.xml" target="runtime"  dir="${project.build.directory}/${nutch.checkout.dir}">
+                                <ant antfile="${project.build.directory}/${nutch.checkout.dir}/build.xml"
+                                     target="runtime"
+                                     dir="${project.build.directory}/${nutch.checkout.dir}">
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
                                 <move file="${project.build.directory}/${nutch.checkout.dir}/urls" todir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/" />
-                            </tasks>
+                                <delete>
+                                    <fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="*-0.98.8-hadoop2.jar"/>
+                                </delete>
+                            </target>
                         </configuration>
                     </execution>
                     <execution>
@@ -224,15 +229,11 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo message="Packaging" />
                                 <delete dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/test"/>
-                                <delete>
-                                    <fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="**/**-0.98.8-hadoop2.jar"/>
-                                </delete>
                                 <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/"/>
-                                <!--<delete dir="${project.build.directory}/${nutch.checkout.dir}"/>-->
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

@@ -35,9 +35,7 @@
 # skip URLs with slash-delimited segment that repeats 3+ times, to break loops
 -.*(/[^/]+)/[^/]+\1/[^/]+\1/
 
-+http://www\.intend\.ro
-
--^http://www\.intend\.ro/([a-z0-9A-Z\/\-]*)-vs-([a-z0-9A-Z\/\-]*).*$
+-^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 
 # accept anything else
 +.

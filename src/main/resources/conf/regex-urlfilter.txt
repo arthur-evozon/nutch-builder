@@ -37,8 +37,6 @@
 
 -^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 
-
-
 -^(http|https?://)?www\.emag\.ro/supermarket/.*
 -^(http|https?://)?www\.emag\.ro/jucarii\-de\-exterior/.*
 -^(http|https?://)?www\.emag\.ro/jucarii/.*
@@ -106,18 +104,22 @@
 -^(http|https?://)?www\.emag\.ro/aragazuri\-cuptoare\-microunde/.*
 -^(http|https?://)?www\.emag\.ro/incorporabile/.*
 
--^(http|https?://)?www\.flanco\.ro/jucarii-si-articole-copii.*
--^(http|https?://)?www\.flanco\.ro/casa-si-gradina..*
--^(http|https?://)?www\.flanco\.ro/ingrijire-personala.*
--^(http|https?://)?www\.flanco\.ro/electrocasnice-.*
+-^(http|https?://)?www\.flanco\.ro/jucarii\-si\-articole\-copii.*
+-^(http|https?://)?www\.flanco\.ro/casa\-si\-gradina.*
+-^(http|https?://)?www\.flanco\.ro/ingrijire\-personala.*
+-^(http|https?://)?www\.flanco\.ro/electrocasnice\-.*
+-^(http|https?://)?www\.flanco\.ro/.*price=.*
+-^(http|https?://)?www\.flanco\.ro/.*/banner/.*
 
+-^(http|https?://)?www\.altex\.ro/auto\-moto/.*
+-^(http|https?://)?www\.altex\.ro/baby/.*
+-^(http|https?://)?www\.altex\.ro/casa\-si\-gradina/.*
 
 #-^(http|https?://)?www\.emag\.ro/.*
 #-^(http|https?://)?www\.flanco\.ro/.*
 #-^(http|https?://)?www\.altex\.ro/.*
 #-^(http|https?://)?www\.evomag\.ro/.*
 #-^(http|https?://)?www\.carrefour\-online\.ro/.*
-
 
 
 # accept anything else

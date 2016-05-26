@@ -115,11 +115,21 @@
 -^(http|https?://)?www\.altex\.ro/baby/.*
 -^(http|https?://)?www\.altex\.ro/casa\-si\-gradina/.*
 
+-^(http|https?://)?www\.evomag\.ro/AUTO.*
+-^(http|https?://)?www\.evomag\.ro/Bricolaj.*
+-^(http|https?://)?www\.evomag\.ro/ELECTROCASNICE.*
+-^(http|https?://)?www\.evomag\.ro/Fashion.*
++^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala\-Tuns\-Ras/.*
+-^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala.*
+-^(http|https?://)?www\.evomag\.ro/Mama\-si\-Copilul.*
+-^(http|https?://)?www\.evomag\.ro/Sport\-Fitness.*
+
 #-^(http|https?://)?www\.emag\.ro/.*
 #-^(http|https?://)?www\.flanco\.ro/.*
 #-^(http|https?://)?www\.altex\.ro/.*
 #-^(http|https?://)?www\.evomag\.ro/.*
 #-^(http|https?://)?www\.carrefour\-online\.ro/.*
+#-^(http|https?://)?www\.evomag\.ro/
 
 
 # accept anything else

@@ -15,7 +15,7 @@
     <!-- ============== -->
     <properties>
         <gora.repo.url>scm:git:git@github.com:arthur-evozon/gora.git</gora.repo.url>
-        <gora.branch>upgrade_hadoop-2.7.1_hbase-1.1.2_solr-4.10.3</gora.branch>
+        <gora.branch>upgrade-hbase_1.1.2</gora.branch>
         <gora.version>0.7-SNAPSHOT</gora.version>
         <gora.checkout.dir>apache-gora</gora.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
 
@@ -103,9 +103,10 @@
                             <executable>mvn</executable>
                             <workingDirectory>${project.build.directory}/${gora.checkout.dir}</workingDirectory>
                             <arguments>
-                                <argument>-DskipTests</argument>
                                 <argument>clean</argument>
                                 <argument>install</argument>
+                                <argument>-DskipTests</argument>
+                                <argument>-Phadoop2</argument>
                             </arguments>
                         </configuration>
                     </execution>

@@ -217,9 +217,9 @@
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
                                 <move file="${project.build.directory}/${nutch.checkout.dir}/urls" todir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/" />
-                                <delete>
-                                    <fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="*-0.98.8-hadoop2.jar"/>
-                                </delete>
+                                <!--<delete>-->
+                                    <!--<fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="*-0.98.8-hadoop2.jar"/>-->
+                                <!--</delete>-->
                             </target>
                         </configuration>
                     </execution>

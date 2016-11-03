@@ -20,131 +20,139 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+    <property>
+        <name>http.agent.name</name>
+        <value>R2D2</value>
+    </property>
 
-	<property>
-		 <name>http.agent.name</name>
-		 <value>R2D2</value>
-	</property>
+    <property>
+        <name>http.content.limit</name>
+        <value>6553600</value>
+    </property>
 
-	<property>
-		<name>http.content.limit</name>
-		<value>6553600</value>
-	</property>	
+    <property>
+        <name>storage.data.store.class</name>
+        <value>org.apache.gora.hbase.store.HBaseStore</value>
+    </property>
 
-	<property>
-    	<name>storage.data.store.class</name>
-    	<value>org.apache.gora.hbase.store.HBaseStore</value>
-  	</property>
-	
-	<property>
-		<name>plugin.includes</name>
-		<value>protocol-httpclient|urlfilter-regex|parse-(text|tika|js)|index-(basic|anchor)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)|indexer-elastic-products|evozon-plugin-product-extractor</value>
-	</property>
+    <property>
+        <name>plugin.folders</name>
+        <value>nutch/plugins</value>
+    </property>
 
-	<property>
-		<name>parser.character.encoding.default</name>
-		<value>utf-8</value>
-	</property>	
+    <property>
+        <name>plugin.includes</name>
+        <value>
+            protocol-httpclient|urlfilter-regex|parse-(text|tika|js)|index-(basic|anchor)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)|indexer-elastic-products|evozon-plugin-product-extractor
+        </value>
+    </property>
 
-	<!-- -->
-	<property>
-		<name>elastic.host</name>
-		<value>localhost</value>
-	</property>
+    <property>
+        <name>urlfilter.regex.file</name>
+        <value>nutch/conf/regex-urlfilter.txt</value>
+    </property>
 
-	<property>
-		<name>elastic.port</name>
-		<value>9300</value>
-	</property>
+    <property>
+        <name>urlfilter.domain.file</name>
+        <value>nutch/conf/domain-urlfilter.txt</value>
+    </property>
 
-	<property>
-		<name>elastic.cluster</name>
-		<value>elasticsearch</value>
-	</property>
+    <property>
+        <name>urlfilter.prefix.file</name>
+        <value>nutch/conf/prefix-urlfilter.txt</value>
+    </property>
 
-	<property>
-		<name>elastic.index</name>
-		<value>nutchindex</value>
-	</property>
+    <property>
+        <name>urlfilter.suffix.file</name>
+        <value>nutch/conf/suffix-urlfilter.txt</value>
+    </property>
 
-	<property>
-		<name>elastic.max.bulk.docs</name>
-		<value>5</value>
-		<description>Maximum size of the bulk in number of documents.</description>
-	</property>
+    <property>
+        <name>parser.character.encoding.default</name>
+        <value>utf-8</value>
+    </property>
 
-	<property>
-		<name>elastic.max.bulk.size</name>
-		<value>1000</value>
-		<description>Maximum size of the bulk in bytes.</description>
-	</property>
-	
-	<!-- fetching overrides -->	
-	<property>
-		<name>fetcher.server.delay</name>
-		<value>1</value>
-	</property>
+    <!-- elasticsearch indexing -->
+    <property>
+        <name>elastic.host</name>
+        <value>localhost</value>
+    </property>
 
-	<property>
-	  <name>fetcher.threads.fetch</name>
-	  <value>10</value>	  
-	</property>
+    <property>
+        <name>elastic.port</name>
+        <value>9300</value>
+    </property>
 
-	<property>
-		<name>fetcher.threads.per.queue</name>
-		<value>1</value>
-	</property>	
+    <property>
+        <name>elastic.cluster</name>
+        <value>elasticsearch</value>
+    </property>
 
-	<property>
-	  <name>fetcher.verbose</name>
-	  <value>true</value>
-	  <description>If true, fetcher will log more verbosely.</description>
-	</property>
-	
-	<property>
-	  <name>fetcher.verbose</name>
-	  <value>true</value>
-	  <description>If true, fetcher will log more verbosely.</description>
-	</property>
+    <property>
+        <name>elastic.index</name>
+        <value>nutchindex</value>
+    </property>
 
-	<!-- crawl db overrides -->	
-	<property>
-		<name>db.ignore.external.links</name>
-		<value>true</value>
-		<description>If true, outlinks leading from a page to external hosts
-			will be ignored. This is an effective way to limit the crawl to include
-			only initially injected hosts, without creating complex URLFilters.
-		</description>
-	</property>
+    <property>
+        <name>elastic.max.bulk.docs</name>
+        <value>5</value>
 
-	<property>
-		<name>db.max.outlinks.per.page</name>
-		<value>-1</value>
-		<description>The maximum number of outlinks that we'll process for a page.
-			If this value is nonnegative (>=0), at most db.max.outlinks.per.page outlinks
-			will be processed for a page; otherwise, all outlinks will be processed.
-		</description>
-	</property>	
+    <property>
+        <name>elastic.max.bulk.size</name>
+        <value>1000</value>
+    </property>
 
-	<!-- more aggressive crawling -->
-	<property>
-		<name>db.fetch.schedule.adaptive.sync_delta</name>
-		<value>false</value>
-	</property>
+    <!-- fetching overrides -->
+    <property>
+        <name>fetcher.server.delay</name>
+        <value>1</value>
+    </property>
 
-	<property>
-		<name>db.fetch.interval.default</name>
-		<value>60</value> <!-- 604800 = 1 week -->
-		<description>The default number of seconds between re-fetches of a page (30 days).
-		</description>
-	</property>
+    <property>
+        <name>fetcher.threads.fetch</name>
+        <value>10</value>
+    </property>
 
-	<property>
-  		<name>db.fetch.interval.max</name>
-  		<value>60</value>
-  		<description>The maximum number of seconds between re-fetches of a page
-  			(90 days). After this period every page in the db will be re-tried, no
-  			matter what is its status.
-  		</description>
-	</property>
+    <property>
+        <name>fetcher.threads.per.queue</name>
+        <value>1</value>
+    </property>
+
+    <property>
+        <name>fetcher.verbose</name>
+        <value>true</value>
+        <description>If true, fetcher will log more verbosely.</description>
+    </property>
+
+    <!-- crawl db overrides -->
+    <property>
+        <name>db.ignore.external.links</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>db.max.outlinks.per.page</name>
+        <value>-1</value>
+    </property>
+
+    <!-- more aggressive crawling -->
+    <property>
+        <name>db.fetch.schedule.adaptive.sync_delta</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>db.fetch.interval.default</name>
+        <value>60</value> <!-- 604800 = 1 week -->
+    </property>
+
+    <property>
+        <name>db.fetch.interval.max</name>
+        <value>60</value>
+    </property>
+
+    <property>
+        <name>parser.skip.truncated</name>
+        <value>false</value>
+    </property>
 </configuration>

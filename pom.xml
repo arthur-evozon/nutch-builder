@@ -24,6 +24,10 @@
         <nutch.checkout.dir>apache-nutch</nutch.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
         <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
         <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
+
+        <deployable-nutch-jar>nutch-all.jar</deployable-nutch-jar>
+        <nutch-job-file>${project.build.directory}/${nutch.checkout.dir}/runtime/deploy/${project.artifactId}.job</nutch-job-file>
+        <nutch-runtime-local>${project.build.directory}/${nutch.checkout.dir}/runtime/local</nutch-runtime-local>
     </properties>
 
     <!-- ========= -->
@@ -66,29 +70,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-ivy-resources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/${nutch.checkout.dir}/ivy</outputDirectory>
-                            <overwrite>true</overwrite>
-                            <resources>
-                                <resource>
-                                    <directory>${project.basedir}/ivy</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
@@ -103,10 +84,12 @@
                             <executable>mvn</executable>
                             <workingDirectory>${project.build.directory}/${gora.checkout.dir}</workingDirectory>
                             <arguments>
-                                <argument>clean</argument>
-                                <argument>install</argument>
-                                <argument>-DskipTests</argument>
-                                <argument>-Phadoop2</argument>
+                                <argument>validate</argument>
+                                <!--<argument>clean</argument>-->
+                                <!--<argument>install</argument>-->
+                                <!--<argument>-DskipTests</argument>-->
+
+                                <!--<argument>-Phadoop2</argument>-->
                             </arguments>
                         </configuration>
                     </execution>
@@ -152,7 +135,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
+                    <execution>
+                        <id>copy-ivy-resources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${nutch.checkout.dir}/ivy</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/ivy</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
                     <execution>
                         <id>copy-resources</id>
                         <phase>compile</phase>
@@ -183,7 +184,7 @@
                     <dependency>
                         <groupId>com.sun</groupId>
                         <artifactId>tools</artifactId>
-                        <version>1.7</version>
+                        <version>1.8</version>
                         <scope>system</scope>
                         <systemPath>${java.home}/../lib/tools.jar</systemPath>
                     </dependency>
@@ -217,12 +218,34 @@
                                     <property name="final.name" value="${project.artifactId}"/>
                                 </ant>
                                 <move file="${project.build.directory}/${nutch.checkout.dir}/urls" todir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/" />
-                                <!--<delete>-->
-                                    <!--<fileset dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/lib" includes="*-0.98.8-hadoop2.jar"/>-->
-                                <!--</delete>-->
+                                <delete>
+                                    <fileset dir="." includes="**/*.bak"/>
+                                </delete>
+                                <copy todir="${project.build.directory}/${nutch.checkout.dir}/lib/">
+                                    <fileset dir="${project.basedir}/lib" >
+                                        <include name="**/*.jar"/>
+                                    </fileset>
+                                </copy>
                             </target>
                         </configuration>
                     </execution>
+
+                    <!--builds a zip of the runtime/local binary release-->
+                    <!--<execution>-->
+                        <!--<id>package</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>run</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<target>-->
+                                <!--<echo message="Packaging" />-->
+                                <!--<delete dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/test"/>-->
+                                <!--<zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/"/>-->
+                            <!--</target>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+
                     <execution>
                         <id>package</id>
                         <phase>package</phase>
@@ -231,9 +254,28 @@
                         </goals>
                         <configuration>
                             <target>
-                                <echo message="Packaging" />
-                                <delete dir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/test"/>
-                                <zip destfile="${project.build.directory}/${project.artifactId}.zip" basedir="${project.build.directory}/${nutch.checkout.dir}/runtime/local/"/>
+                                <echo message="Full deployable jar" />
+                                <copy todir="${nutch-runtime-local}/tmp/nutch/conf">
+                                    <fileset dir="${nutch-runtime-local}/conf" >
+                                        <include name="**"/>
+                                    </fileset>
+                                </copy>
+                                <copy todir="${nutch-runtime-local}/tmp/classes/nutch/plugins">
+                                    <fileset dir="${nutch-runtime-local}/plugins" >
+                                        <include name="**"/>
+                                    </fileset>
+                                </copy>
+                                <jar destfile="${project.build.directory}/${deployable-nutch-jar}">
+                                    <zipfileset includes="org/**/*" src="${nutch-job-file}"/>
+                                    <fileset dir="${nutch-runtime-local}">
+                                        <include name="**/lib/**"/>
+                                    </fileset>
+                                    <fileset dir="${nutch-runtime-local}/tmp">
+                                        <include name="**/nutch/conf/**"/>
+                                        <include name="**/classes/nutch/plugins/**"/>
+                                    </fileset>
+                                </jar>
+                                <delete dir="${nutch-runtime-local}/tmp"/>
                             </target>
                         </configuration>
                     </execution>

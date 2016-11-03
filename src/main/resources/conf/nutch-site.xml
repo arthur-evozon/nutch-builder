@@ -96,6 +96,7 @@
     <property>
         <name>elastic.max.bulk.docs</name>
         <value>5</value>
+    </property>
 
     <property>
         <name>elastic.max.bulk.size</name>

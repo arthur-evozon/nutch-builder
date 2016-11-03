@@ -84,10 +84,10 @@
                             <executable>mvn</executable>
                             <workingDirectory>${project.build.directory}/${gora.checkout.dir}</workingDirectory>
                             <arguments>
-                                <argument>validate</argument>
-                                <!--<argument>clean</argument>-->
-                                <!--<argument>install</argument>-->
-                                <!--<argument>-DskipTests</argument>-->
+                                <!--<argument>validate</argument>-->
+                                <argument>clean</argument>
+                                <argument>install</argument>
+                                <argument>-DskipTests</argument>
 
                                 <!--<argument>-Phadoop2</argument>-->
                             </arguments>

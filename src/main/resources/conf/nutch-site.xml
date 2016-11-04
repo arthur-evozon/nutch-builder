@@ -68,6 +68,12 @@
     </property>
 
     <property>
+        <name>parse.plugin.file</name>
+        <value>nutch/conf/parse-plugins.xml</value>
+    </property>
+
+
+    <property>
         <name>parser.character.encoding.default</name>
         <value>utf-8</value>
     </property>
@@ -122,7 +128,6 @@
     <property>
         <name>fetcher.verbose</name>
         <value>true</value>
-        <description>If true, fetcher will log more verbosely.</description>
     </property>
 
     <!-- crawl db overrides -->

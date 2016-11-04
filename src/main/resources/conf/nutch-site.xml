@@ -72,7 +72,6 @@
         <value>nutch/conf/parse-plugins.xml</value>
     </property>
 
-
     <property>
         <name>parser.character.encoding.default</name>
         <value>utf-8</value>

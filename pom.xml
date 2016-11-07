@@ -256,11 +256,6 @@
                             <target>
                                 <echo message="Full deployable jar" />
                                 <!--prepare folder structures into tmp-->
-                                <copy todir="${nutch-runtime-local}/tmp/nutch/conf">
-                                    <fileset dir="${nutch-runtime-local}/conf" >
-                                        <include name="**"/>
-                                    </fileset>
-                                </copy>
                                 <copy todir="${nutch-runtime-local}/tmp/classes/nutch/plugins">
                                     <fileset dir="${nutch-runtime-local}/plugins" >
                                         <include name="**"/>
@@ -277,9 +272,11 @@
                                     <fileset dir="${nutch-runtime-local}">
                                         <include name="**/lib/**"/>
                                     </fileset>
+                                    <fileset dir="${nutch-runtime-local}" >
+                                        <include name="conf/**"/>
+                                    </fileset>
                                     <fileset dir="${nutch-runtime-local}/tmp">
-                                        <include name="**/nutch/conf/**"/>
-                                        <include name="**/classes/nutch/plugins/**"/>
+                                        <include name="classes/nutch/plugins/**"/>
                                         <include name="gora.properties"/>
                                     </fileset>
                                 </jar>

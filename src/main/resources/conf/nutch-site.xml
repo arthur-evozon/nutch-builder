@@ -49,27 +49,27 @@
 
     <property>
         <name>urlfilter.regex.file</name>
-        <value>nutch/conf/regex-urlfilter.txt</value>
+        <value>conf/regex-urlfilter.txt</value>
     </property>
 
     <property>
         <name>urlfilter.domain.file</name>
-        <value>nutch/conf/domain-urlfilter.txt</value>
+        <value>conf/domain-urlfilter.txt</value>
     </property>
 
     <property>
         <name>urlfilter.prefix.file</name>
-        <value>nutch/conf/prefix-urlfilter.txt</value>
+        <value>conf/prefix-urlfilter.txt</value>
     </property>
 
     <property>
         <name>urlfilter.suffix.file</name>
-        <value>nutch/conf/suffix-urlfilter.txt</value>
+        <value>conf/suffix-urlfilter.txt</value>
     </property>
 
     <property>
         <name>parse.plugin.file</name>
-        <value>nutch/conf/parse-plugins.xml</value>
+        <value>conf/parse-plugins.xml</value>
     </property>
 
     <property>

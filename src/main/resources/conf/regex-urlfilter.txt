@@ -37,6 +37,8 @@
 
 -^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 
+-^(http|https?://)?www\.emag\.ro/.*\,.*
+
 -^(http|https?://)?www\.emag\.ro/supermarket/.*
 -^(http|https?://)?www\.emag\.ro/jucarii\-de\-exterior/.*
 -^(http|https?://)?www\.emag\.ro/jucarii/.*

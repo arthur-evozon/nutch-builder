@@ -37,7 +37,7 @@
 
     <property>
         <name>plugin.folders</name>
-        <value>nutch/plugins</value>
+        <value>nutch/plugins,classes/nutch/plugins</value>
     </property>
 
     <property>

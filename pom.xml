@@ -17,11 +17,11 @@
         <gora.repo.url>scm:git:git@github.com:arthur-evozon/gora.git</gora.repo.url>
         <gora.branch>upgrade-hbase_1.2.3</gora.branch>
         <gora.version>0.7-SNAPSHOT</gora.version>
-        <gora.checkout.dir>apache-gora</gora.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
+        <gora.checkout.dir>apache-gora</gora.checkout.dir>
 
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
         <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
-        <nutch.checkout.dir>apache-nutch</nutch.checkout.dir> <!-- apache-nutch-${nutch.branch} -->
+        <nutch.checkout.dir>apache-nutch</nutch.checkout.dir>
         <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
         <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
 
@@ -264,6 +264,9 @@
                                 <copy todir="${nutch-runtime-local}/tmp">
                                     <fileset dir="${nutch-runtime-local}/conf" >
                                         <include name="gora.properties"/>
+                                        <include name="gora-hbase-mapping.xml"/>
+                                        <include name="hbase-site.xml"/>
+                                        <include name="nutch-site.xml"/>
                                     </fileset>
                                 </copy>
                                 <!--now jar it all up-->
@@ -278,6 +281,9 @@
                                     <fileset dir="${nutch-runtime-local}/tmp">
                                         <include name="classes/nutch/plugins/**"/>
                                         <include name="gora.properties"/>
+                                        <include name="gora-hbase-mapping.xml"/>
+                                        <include name="hbase-site.xml"/>
+                                        <include name="nutch-site.xml"/>
                                     </fileset>
                                 </jar>
                                 <!--and now clean it-->

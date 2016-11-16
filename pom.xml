@@ -263,10 +263,14 @@
                                 </copy>
                                 <copy todir="${nutch-runtime-local}/tmp">
                                     <fileset dir="${nutch-runtime-local}/conf" >
+                                        <include name="elasticsearch.conf"/>
+
                                         <include name="gora.properties"/>
                                         <include name="gora-hbase-mapping.xml"/>
                                         <include name="hbase-site.xml"/>
                                         <include name="nutch-site.xml"/>
+
+                                        <include name="READ.ME"/>
                                     </fileset>
                                 </copy>
                                 <!--now jar it all up-->
@@ -280,10 +284,15 @@
                                     </fileset>
                                     <fileset dir="${nutch-runtime-local}/tmp">
                                         <include name="classes/nutch/plugins/**"/>
+
+                                        <include name="elasticsearch.conf"/>
+
                                         <include name="gora.properties"/>
                                         <include name="gora-hbase-mapping.xml"/>
                                         <include name="hbase-site.xml"/>
                                         <include name="nutch-site.xml"/>
+
+                                        <include name="READ.ME"/>
                                     </fileset>
                                 </jar>
                                 <!--and now clean it-->

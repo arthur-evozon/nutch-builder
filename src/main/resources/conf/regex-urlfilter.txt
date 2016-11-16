@@ -38,6 +38,13 @@
 -^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 
 -^(http|https?://)?www\.emag\.ro/.*\,.*
+#-^(http|https?://)?www\.emag\.ro/.*\&type\=menu_tree.*
+#-^(http|https?://)?www\.emag\.ro/.*ref\=hp_menu_quick\-nav.*
+#-^(http|https?://)?www\.emag\.ro/.*tree_ref\=.*
+#-^(http|https?://)?www\.emag\.ro/.*type\=filter.*
+-^(http|https?://)?www\.emag\.ro/.*birotica\-si\-papetarie.*
+# somehow this keeps sneaking in:
+-^(http|https?://)?www\.emag\.ro/.*ace\-agrafe\-clipsuri\-pioneze\-umezitoare.*
 
 -^(http|https?://)?www\.emag\.ro/supermarket/.*
 -^(http|https?://)?www\.emag\.ro/jucarii\-de\-exterior/.*
@@ -121,10 +128,11 @@
 -^(http|https?://)?www\.evomag\.ro/Bricolaj.*
 -^(http|https?://)?www\.evomag\.ro/ELECTROCASNICE.*
 -^(http|https?://)?www\.evomag\.ro/Fashion.*
-+^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala\-Tuns\-Ras/.*
 -^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala.*
 -^(http|https?://)?www\.evomag\.ro/Mama\-si\-Copilul.*
 -^(http|https?://)?www\.evomag\.ro/Sport\-Fitness.*
+
++^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala\-Tuns\-Ras/.*
 
 #-^(http|https?://)?www\.emag\.ro/.*
 #-^(http|https?://)?www\.flanco\.ro/.*

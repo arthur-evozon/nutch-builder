@@ -1,17 +1,21 @@
 When running the 'product-mining-engine' with custom developed Jobs (BatchedNutchCrawlerJob) as the basis of the crawling (batched)
-jobs ,the only configuration file that is needed to be placed into the root of the deployment jar is:
+jobs ,the only configuration files that is needed to be placed into the root of the deployment jar are:
+ - elasticsearch.conf
  - gora.properties
 
 All other configurations are either picked out from the bespoke hadoop configuration (<hadoop:configuration>) or the configuration
-pointing with key-values into the internal jar layout (conf/*). The 'gora.properties' is a special case, because this is exactly how the
-resources is attempted to being loaded up (from the root of the jar).
+ pointing with key-values into the internal jar layout (conf/*). The 'gora.properties' is a special case, because this is exactly how the
+ resources are attempted to being loaded up by org.apache.gora.store.DataStoreFactory#createProps (in case of 'gora.properties'), and
+ ElasticIndexWriter (in case of 'elasticsearch.conf')- from the root of the jar.
 
 The other option is to run hadoop <jar-tasklet>'s as the basis of the crawling jobs. This option is much simpler and straight
-forward to setup, but it comes with an issue. Because the bespoke hadoop configuration (that is provided to batched tasks - <jar-tasklet>'s)
- are not actually carried through to the Job's that will be executed by the hadoop <jar-tasklet>'s you need to provide the configuration
- files into the root of the deployment jar. These files - besides the 'gora.properties' - that would provide the required configuration
- (that otherwise would be setup or provided by the hadoop configuration) are (and have to be placed into the root of the jar):
- - (elasticsearch.conf?)
+ forward to setup, but it comes with an issue. Because the bespoke hadoop configuration (that is provided to batched tasks -
+ <jar-tasklet>'s) are not actually carried through to the Job's that will be executed by the hadoop <jar-tasklet>'s you need to provide
+ the configuration files into the root of the deployment jar. These files - besides the 'gora.properties' - that would provide the
+ required configuration (that otherwise would be setup or provided by the hadoop configuration) are (and have to be placed into the root
+ of the jar):
+ - elasticsearch.conf
+ - gora.properties
  - gora-hbase-mapping.xml
  - hbase-site.xml
  - nutch-site.xml

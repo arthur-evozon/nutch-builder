@@ -302,6 +302,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <file>${project.build.directory}/${deployable-nutch-jar}</file>
+                    <groupId>org.apache.nutch</groupId>
+                    <artifactId>nutch-all</artifactId>
+                    <version>1.0</version>
+                    <packaging>jar</packaging>
+                    <createChecksum>true</createChecksum>
+                    <generatePom>true</generatePom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-nutch-all</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

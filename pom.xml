@@ -6,7 +6,7 @@
 
     <packaging>pom</packaging>
 
-    <groupId>com.evozon</groupId>
+    <groupId>com.evozon.mining</groupId>
     <artifactId>nutch-builder</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -310,12 +310,9 @@
                 <version>2.5.2</version>
                 <configuration>
                     <file>${project.build.directory}/${deployable-nutch-jar}</file>
-                    <groupId>${groupId}.mining</groupId>
-                    <artifactId>nutch-crawl</artifactId>
-                    <version>1.1</version>
-                    <packaging>jar</packaging>
                     <createChecksum>true</createChecksum>
-                    <generatePom>true</generatePom>
+                    <generatePom>false</generatePom>
+                    <pomFile>src/main/resources/nutch-crawl-pom.xml</pomFile>
                 </configuration>
                 <executions>
                     <execution>

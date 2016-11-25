@@ -25,7 +25,7 @@
         <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
         <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
 
-        <deployable-nutch-jar>nutch-all.jar</deployable-nutch-jar>
+        <deployable-nutch-jar>nutch-crawl.jar</deployable-nutch-jar>
         <nutch-job-file>${project.build.directory}/${nutch.checkout.dir}/runtime/deploy/${project.artifactId}.job</nutch-job-file>
         <nutch-runtime-local>${project.build.directory}/${nutch.checkout.dir}/runtime/local</nutch-runtime-local>
     </properties>
@@ -309,16 +309,16 @@
                 <version>2.5.2</version>
                 <configuration>
                     <file>${project.build.directory}/${deployable-nutch-jar}</file>
-                    <groupId>org.apache.nutch</groupId>
-                    <artifactId>nutch-all</artifactId>
-                    <version>1.0</version>
+                    <groupId>${groupId}.mining</groupId>
+                    <artifactId>nutch-crawl</artifactId>
+                    <version>1.1</version>
                     <packaging>jar</packaging>
                     <createChecksum>true</createChecksum>
                     <generatePom>true</generatePom>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install-nutch-all</id>
+                        <id>install-nutch-crawl</id>
                         <goals>
                             <goal>install-file</goal>
                         </goals>

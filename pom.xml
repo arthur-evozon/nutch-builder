@@ -278,7 +278,7 @@
                                     <zipfileset includes="org/**/*" src="${nutch-job-file}"/>
                                     <fileset dir="${nutch-runtime-local}">
                                         <include name="**/lib/**"/>
-                                        <exclude name="**/lib/slf4j-*.jar"/>
+                                        <exclude name="**/lib/slf4j-log4j*.jar"/>
                                     </fileset>
                                     <fileset dir="${nutch-runtime-local}" >
                                         <include name="conf/**"/>

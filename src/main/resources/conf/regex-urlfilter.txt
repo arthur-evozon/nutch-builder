@@ -131,6 +131,12 @@
 -^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala.*
 -^(http|https?://)?www\.evomag\.ro/Mama\-si\-Copilul.*
 -^(http|https?://)?www\.evomag\.ro/Sport\-Fitness.*
+# Tracker:
+-^(http|https?://)?www\.evomag\.ro/.*/tracker/.*
+-^(http|https?://)?www\.evomag\.ro/.*Tracker.*
+-^(http|https?://)?www\.evomag\.ro/.*Pleisty.*
+-^(http|https?://)?www\.evomag\.ro/.*pleisty.*
+
 
 +^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala\-Tuns\-Ras/.*
 

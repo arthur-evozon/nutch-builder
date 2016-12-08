@@ -35,6 +35,17 @@
 # skip URLs with slash-delimited segment that repeats 3+ times, to break loops
 -.*(/[^/]+)/[^/]+\1/[^/]+\1/
 
+# skip URLs with consecutive slash-delimited segment that repeats 3+ times, to break loops. ie: x/a/a/a/y/
+-.*(/[^/]+)\1+\1+/.*
+
+-.*(/[^/]+)\1+/.*
+-.*/\<.*/\>.*
+-.*<.*/>.*
+-.*</.*>.*
+-.*\)\.att.*
+-.*javascript.*
+
+
 -^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 
 -^(http|https?://)?www\.emag\.ro/.*\,.*

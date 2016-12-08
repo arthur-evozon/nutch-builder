@@ -35,6 +35,7 @@
 # skip URLs with slash-delimited segment that repeats 3+ times, to break loops
 -.*(/[^/]+)/[^/]+\1/[^/]+\1/
 
+######################## my general exclusion rules: based on observations of the sites crawled ########################
 # skip URLs with consecutive slash-delimited segment that repeats 3+ times, to break loops. ie: x/a/a/a/y/
 -.*(/[^/]+)\1+\1+/.*
 
@@ -44,7 +45,7 @@
 -.*</.*>.*
 -.*\)\.att.*
 -.*javascript.*
-
+######################## end: my general exclusion rules
 
 -^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
 

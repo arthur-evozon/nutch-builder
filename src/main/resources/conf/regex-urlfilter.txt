@@ -150,9 +150,8 @@
 -^(http|https?://)?www\.evomag\.ro/.*Pleisty.*
 -^(http|https?://)?www\.evomag\.ro/.*pleisty.*
 -^(http|https?://)?www\.evomag\.ro/.*gtm\.start.*
--^(http|https?://)?www\.evomag\.ro/.*a\.maintainHover .*
-
-+^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala\-Tuns\-Ras/.*
+-^(http|https?://)?www\.evomag\.ro/.*a\.maintainHover.*
+-^(http|https?://)?www\.evomag\.ro/.*[/^\d+(\.\d+)?]$
 
 #-^(http|https?://)?www\.emag\.ro/.*
 #-^(http|https?://)?www\.flanco\.ro/.*

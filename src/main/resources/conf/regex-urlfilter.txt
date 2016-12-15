@@ -32,13 +32,21 @@
 # skip URLs containing certain characters as probable queries, etc.
 #-[?*!@=]
 
-# skip URLs with slash-delimited segment that repeats 3+ times, to break loops
+########## deal with only the sites we want:#########
+
+-^(http|https?://)?(www\.)?emag\.ro/.*
+-^(http|https?://)?(www\.)?flanco\.ro/.*
+#-^(http|https?://)?(www\.)?altex\.ro/.*
+-^(http|https?://)?(www\.)?evomag\.ro/.*
+-^(http|https?://)?(www\.)?intend\.ro/.*
+
+####################################################
+
+# skip URLs with slash-delimited segment that repeats 3+ times, to break loops. ie: /a/x/a/y/a/
 -.*(/[^/]+)/[^/]+\1/[^/]+\1/
 
-######################## my general exclusion rules: based on observations of the sites crawled ########################
 # skip URLs with consecutive slash-delimited segment that repeats 3+ times, to break loops. ie: x/a/a/a/y/
 -.*(/[^/]+)\1+\1+/.*
-# catch /a/b/a :
 -.*(/[^/]+)/[^/]+\1.*
 -.*(/[^/]+)\1+/.*
 -.*/\<.*/\>.*
@@ -46,105 +54,24 @@
 -.*</.*>.*
 -.*\)\..*
 -.*javascript.*
-######################## end: my general exclusion rules
 
--^(http|https?://)?www\.intend\.ro/c/.*\-vs\-.*$
-
+############################################
+############### emag #####################
 -^(http|https?://)?www\.emag\.ro/.*\,.*
-#-^(http|https?://)?www\.emag\.ro/.*\&type\=menu_tree.*
-#-^(http|https?://)?www\.emag\.ro/.*ref\=hp_menu_quick\-nav.*
-#-^(http|https?://)?www\.emag\.ro/.*tree_ref\=.*
-#-^(http|https?://)?www\.emag\.ro/.*type\=filter.*
 -^(http|https?://)?www\.emag\.ro/.*birotica\-si\-papetarie.*
-# somehow this keeps sneaking in:
 -^(http|https?://)?www\.emag\.ro/.*ace\-agrafe\-clipsuri\-pioneze\-umezitoare.*
+-^(http|https?://)?www\.emag\.ro/.*/p2/.*
+-^(http|https?://)?www\.emag\.ro/.*/promotii/.*
+-^(http|https?://)?www\.emag\.ro/.*/stoc/.*
+-^(http|https?://)?www\.emag\.ro/.*/vendor/.*
+-^(http|https?://)?www\.emag\.ro/.*/noutati/.*
 
--^(http|https?://)?www\.emag\.ro/supermarket/.*
--^(http|https?://)?www\.emag\.ro/jucarii\-de\-exterior/.*
--^(http|https?://)?www\.emag\.ro/jucarii/.*
--^(http|https?://)?www\.emag\.ro/imbracaminte\-incaltaminte\-copii/.*
--^(http|https?://)?www\.emag\.ro/carucioare\-transport\-copii/.*
--^(http|https?://)?www\.emag\.ro/mobila\-copii/.*
--^(http|https?://)?www\.emag\.ro/articole\-maternitate/.*
--^(http|https?://)?www\.emag\.ro/articole\-maternitate/.*
--^(http|https?://)?www\.emag\.ro/cosmetica\-ingrijire\-copii/.*
--^(http|https?://)?www\.emag\.ro/scutece\-hrana\-bebelusi/.*
--^(http|https?://)?www\.emag\.ro/televizoare/.*
--^(http|https?://)?www\.emag\.ro/bebelusi/.*
--^(http|https?://)?www\.emag\.ro/moto/.*
--^(http|https?://)?www\.emag\.ro/reparatii\-echipamente\-auto/.*
--^(http|https?://)?www\.emag\.ro/electrica\auto/.*
--^(http|https?://)?www\.emag\.ro/accesorii\-auto\-exterioare\-interioare/.*
--^(http|https?://)?www\.emag\.ro/electronice\-auto/.*
--^(http|https?://)?www\.emag\.ro/intretinere\-cosmetica_auto/.*
--^(http|https?://)?www\.emag\.ro/asigurari\-calatorie.*
--^(http|https?://)?www\.emag\.ro/roviniete.*
--^(http|https?://)?www\.emag\.ro/asigurari\-rca.*
--^(http|https?://)?www\.emag\.ro/anvelope\-jante/.*
--^(http|https?://)?www\.emag\.ro/sport.*/.*
--^(http|https?://)?www\.emag\.ro/pescuit\-vanatoare/.*
--^(http|https?://)?www\.emag\.ro/role\-trotinete\-skateboard/.*
--^(http|https?://)?www\.emag\.ro/fitness\-si\-nutritie/.*
--^(http|https?://)?www\.emag\.ro/televizoare/.*
--^(http|https?://)?www\.emag\.ro/drumetii\-camping\-articole\-voiaj/.*
--^(http|https?://)?www\.emag\.ro/ciclism/.*
--^(http|https?://)?www\.emag\.ro/alergare\-atletism\-triathlon/.*
--^(http|https?://)?www\.emag\.ro/mers/.*
--^(http|https?://)?www\.emag\.ro/petshop/.*
--^(http|https?://)?www\.emag\.ro/curatenie\-intretinere/.*
--^(http|https?://)?www\.emag\.ro/decoratiuni\-interioare/.*
--^(http|https?://)?www\.emag\.ro/textile\-casa\-covoare/.*
--^(http|https?://)?www\.emag\.ro/mobilier.*/.*
--^(http|https?://)?www\.emag\.ro/articole\-bucatarie\-servire/.*
--^(http|https?://)?www\.emag\.ro/iluminat\-si\-electrice/.*
--^(http|https?://)?www\.emag\.ro/sanitare/.*
--^(http|https?://)?www\.emag\.ro/gradinarit/.*
--^(http|https?://)?www\.emag\.ro/scule\-electrice\-si-unelte/.*
--^(http|https?://)?www\.emag\.ro/cadouri/.*
--^(http|https?://)?www\.emag\.ro/birotica\-si\-papetarie/.*
--^(http|https?://)?www\.emag\.ro/muzica/.*
--^(http|https?://)?www\.emag\.ro/carti.*/.*
--^(http|https?://)?www\.emag\.ro/filme/.*
--^(http|https?://)?www\.emag\.ro/igiena\-dentara/.*
--^(http|https?://)?www\.emag\.ro/aparate\-.*/.*
--^(http|https?://)?www\.emag\.ro/cosmetice\-.*/.*
--^(http|https?://)?www\.emag\.ro/machiaj\-unghii/.*
--^(http|https?://)?www\.emag\.ro/parfumuri/.*
--^(http|https?://)?www\.emag\.ro/lenjerie\-pijamale/.*
--^(http|https?://)?www\.emag\.ro/ceasuri/.*
--^(http|https?://)?www\.emag\.ro/accesorii\-.*/.*
--^(http|https?://)?www\.emag\.ro/incaltaminte\-.*/.*
--^(http|https?://)?www\.emag\.ro/imbracaminte\-.*/.*
--^(http|https?://)?www\.emag\.ro/genti\-accesorii\-femei/.*
--^(http|https?://)?www\.emag\.ro/climatizare\-sisteme\-incalzire/.*
--^(http|https?://)?www\.emag\.ro/cmp/.*
--^(http|https?://)?www\.emag\.ro/locuinta\-si\-tesaturi/.*
--^(http|https?://)?www\.emag\.ro/espressoare\-cafea/.*
--^(http|https?://)?www\.emag\.ro/electrocasnice\-.*/.*
--^(http|https?://)?www\.emag\.ro/hote/.*
--^(http|https?://)?www\.emag\.ro/masini\-spalat-.*/.*
--^(http|https?://)?www\.emag\.ro/aragazuri\-cuptoare\-microunde/.*
--^(http|https?://)?www\.emag\.ro/incorporabile/.*
+#-^(http|https?://)?www\.emag\.ro/.*&tree_ref=(\d+)?.*
+#-^(http|https?://)?www\.emag\.ro/.*&type=.*
 
--^(http|https?://)?www\.flanco\.ro/jucarii\-si\-articole\-copii.*
--^(http|https?://)?www\.flanco\.ro/casa\-si\-gradina.*
--^(http|https?://)?www\.flanco\.ro/ingrijire\-personala.*
--^(http|https?://)?www\.flanco\.ro/electrocasnice\-.*
--^(http|https?://)?www\.flanco\.ro/.*price=.*
--^(http|https?://)?www\.flanco\.ro/.*/banner/.*
-
--^(http|https?://)?www\.altex\.ro/auto\-moto/.*
--^(http|https?://)?www\.altex\.ro/baby/.*
--^(http|https?://)?www\.altex\.ro/casa\-si\-gradina/.*
-
--^(http|https?://)?www\.evomag\.ro/AUTO.*
--^(http|https?://)?www\.evomag\.ro/Bricolaj.*
--^(http|https?://)?www\.evomag\.ro/ELECTROCASNICE.*
--^(http|https?://)?www\.evomag\.ro/Fashion.*
--^(http|https?://)?www\.evomag\.ro/Ingrijire\-personala.*
--^(http|https?://)?www\.evomag\.ro/Mama\-si\-Copilul.*
--^(http|https?://)?www\.evomag\.ro/Sport\-Fitness.*
-# Tracker:
+-^(http|https?://)?www\.emag\.ro/.*/brand.headline$
+############################################
+############### evomag #####################
 -^(http|https?://)?www\.evomag\.ro/.*/tracker/.*
 -^(http|https?://)?www\.evomag\.ro/.*Tracker.*
 -^(http|https?://)?www\.evomag\.ro/.*Pleisty.*
@@ -153,13 +80,42 @@
 -^(http|https?://)?www\.evomag\.ro/.*a\.maintainHover.*
 -^(http|https?://)?www\.evomag\.ro/.*[/^\d+(\.\d+)?]$
 
-#-^(http|https?://)?www\.emag\.ro/.*
-#-^(http|https?://)?www\.flanco\.ro/.*
-#-^(http|https?://)?www\.altex\.ro/.*
-#-^(http|https?://)?www\.evomag\.ro/.*
-#-^(http|https?://)?www\.carrefour\-online\.ro/.*
-#-^(http|https?://)?www\.evomag\.ro/
+############################################
+############### intend #####################
+####### aggressive intend filtering: #######
 
+-^(http|https?://)?www\.intend\.ro/.*trafic\.ro.*
+-^(http|https?://)?www\.intend\.ro/cms/.*
+-^(http|https?://)?www\.intend\.ro/tools/.*
+-^(http|https?://)?www\.intend\.ro/user/.*
+-^(http|https?://)?www\.intend\.ro/.*\-vs\-.*$
+-^(http|https?://)?www\.intend\.ro/.*\-or\-.*
+-^(http|https?://)?www\.intend\.ro/.*/trafic\.ro/.*
+-^(http|https?://)?www\.intend\.ro/.*javascript.*
+-^(http|https?://)?www\.intend\.ro/.*[_]+null\-.*
+-^(http|https?://)?www\.intend\.ro/.*\-f[1-9]\.*
+
++^(http|https?://)?www\.intend\.ro/produse\-it\-amp\-c/.*
++^(http|https?://)?www\.intend\.ro/.*/s\-b.?/$
++^(http|https?://)?www\.intend\.ro/.*\-\-.*
++^(http|https?://)?www\.intend\.ro/.*\-.*\-.*/?
+-^(http|https?://)?www\.intend\.ro/.*
+############################################
+############### altex #####################
+
+-^(http|https?://)?(www\.)?altex\.ro/campaign.*
+-^(http|https?://)?(www\.)?altex\.ro/catalogsearch.*
+-^(http|https?://)?(www\.)?altex\.ro/ajutor.*
+-^(http|https?://)?(www\.)?altex\.ro/altex-dublul-diferentei-online.*
+-^(http|https?://)?(www\.)?altex\.ro/.*/customer.*
+-^(http|https?://)?(www\.)?altex\.ro/.*anotherlevel.*
+-^(http|https?://)?(www\.)?altex\.ro/.*altnivel.*
+-^(http|https?://)?(www\.)?altex\.ro/.*filtru.*
+-^(http|https?://)?(www\.)?altex\.ro/.*sociallogin.*
+-^(http|https?://)?(www\.)?altex\.ro/.*checkout.*
+-^(http|https?://)?(www\.)?altex\.ro/.*\\/.*
+
+############################################
 
 # accept anything else
 +.

@@ -58,8 +58,6 @@
 ############################################
 ############### emag #####################
 -^(http|https?://)?www\.emag\.ro/.*\,.*
--^(http|https?://)?www\.emag\.ro/.*birotica\-si\-papetarie.*
--^(http|https?://)?www\.emag\.ro/.*ace\-agrafe\-clipsuri\-pioneze\-umezitoare.*
 -^(http|https?://)?www\.emag\.ro/.*/p2/.*
 -^(http|https?://)?www\.emag\.ro/.*/promotii/.*
 -^(http|https?://)?www\.emag\.ro/.*/stoc/.*
@@ -69,7 +67,9 @@
 #-^(http|https?://)?www\.emag\.ro/.*&tree_ref=(\d+)?.*
 #-^(http|https?://)?www\.emag\.ro/.*&type=.*
 
--^(http|https?://)?www\.emag\.ro/.*/brand.headline$
+-^(http|https?://)?www\.emag\.ro/.*/.*\.headline$
+-^(http|https?://)?www\.emag\.ro/.*/sort\-.*/.*
+
 ############################################
 ############### evomag #####################
 -^(http|https?://)?www\.evomag\.ro/.*/tracker/.*
@@ -94,6 +94,7 @@
 -^(http|https?://)?www\.intend\.ro/.*javascript.*
 -^(http|https?://)?www\.intend\.ro/.*[_]+null\-.*
 -^(http|https?://)?www\.intend\.ro/.*\-f[1-9]\.*
+-^(http|https?://)?www\.intend\.ro/.*Cauta.*
 
 +^(http|https?://)?www\.intend\.ro/produse\-it\-amp\-c/.*
 +^(http|https?://)?www\.intend\.ro/.*/s\-b.?/$

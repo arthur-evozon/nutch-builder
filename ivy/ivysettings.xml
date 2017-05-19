@@ -67,6 +67,12 @@
                  m2compatible="true"
         />
 
+        <ibiblio name="mavencentral"
+                 root="http://central.maven.org/maven2/"
+                 pattern="${maven2.pattern.ext}"
+                 m2compatible="true"
+        />
+
         <chain name="default" dual="true">
             <filesystem name="local-maven2" m2compatible="true">
                 <artifact pattern="${m2-pattern}"/>
@@ -105,15 +111,17 @@
         <chain name="restletchain">
             <resolver ref="restlet"/>
         </chain>
+        <chain name="mavencentralchain">
+            <resolver ref="mavencentral"/>
+        </chain>
     </resolvers>
     <modules>
-
         <!--
         This forces a requirement for other nutch-artifacts to be built locally
         rather than look for them online.
         -->
         <module organisation="org.apache.nutch" name=".*" resolver="internal"/>
-        <module organisation="org.apache.gora" name=".*" resolver="local-maven2"/>
+        <module organisation="org.apache.gora" name=".*" resolver="mavencentralchain"/>
         <module organisation="org.apache.hbase" name=".*" resolver="local-maven2"/>
         <module organisation="org.restlet" name=".*" resolver="restletchain"/>
         <module organisation="org.restlet.jse" name=".*" resolver="restletchain"/>

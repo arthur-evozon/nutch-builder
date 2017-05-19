@@ -14,13 +14,8 @@
     <!-- = Properties = -->
     <!-- ============== -->
     <properties>
-        <gora.repo.url>scm:git:git@github.com:arthur-evozon/gora.git</gora.repo.url>
-        <gora.branch>upgrade-hbase_1.2.3</gora.branch>
-        <gora.version>0.7-SNAPSHOT</gora.version>
-        <gora.checkout.dir>apache-gora</gora.checkout.dir>
-
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
-        <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
+        <nutch.branch>product-extractor_w/mavencentral-gora-0.7</nutch.branch>
         <nutch.checkout.dir>apache-nutch</nutch.checkout.dir>
         <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
         <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
@@ -40,19 +35,6 @@
                 <artifactId>maven-scm-plugin</artifactId>
                 <version>1.9.4</version>
                 <executions>
-                    <execution>
-                        <id>gora-dependency</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <connectionUrl>${gora.repo.url}</connectionUrl>
-                            <scmVersion>${gora.branch}</scmVersion>
-                            <scmVersionType>branch</scmVersionType>
-                            <checkoutDirectory>${project.build.directory}/${gora.checkout.dir}</checkoutDirectory>
-                        </configuration>
-                        <goals>
-                            <goal>checkout</goal>
-                        </goals>
-                    </execution>
                     <execution>
                         <id>nutch-dependency</id>
                         <phase>generate-sources</phase>
@@ -74,26 +56,6 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <executions>
-                    <execution>
-                        <id>build-gora</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>mvn</executable>
-                            <workingDirectory>${project.build.directory}/${gora.checkout.dir}</workingDirectory>
-                            <arguments>
-                                <!--<argument>validate</argument>-->
-                                <argument>clean</argument>
-                                <argument>install</argument>
-                                <argument>-DskipTests</argument>
-
-                                <!--<argument>-Phadoop2</argument>-->
-                            </arguments>
-                        </configuration>
-                    </execution>
-
                     <execution>
                         <id>build-${product.parsers.common}</id>
                         <phase>generate-sources</phase>

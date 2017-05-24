@@ -15,12 +15,12 @@
     <!-- ============== -->
     <properties>
         <gora.repo.url>scm:git:git@github.com:arthur-evozon/gora.git</gora.repo.url>
-        <gora.branch>upgrade-hbase_1.2.3</gora.branch>
-        <gora.version>0.7-SNAPSHOT</gora.version>
+        <gora.branch>fix-leaking-zk-connections</gora.branch>
+        <gora.version>0.8-SNAPSHOT</gora.version>
         <gora.checkout.dir>apache-gora</gora.checkout.dir>
 
         <nutch.repo.url>scm:git:git@github.com:arthur-evozon/nutch.git</nutch.repo.url>
-        <nutch.branch>product-extractor_gora-0.7-SNAPSHOT</nutch.branch>
+        <nutch.branch>product-extractor_gora-0.8-SNAPSHOT</nutch.branch>
         <nutch.checkout.dir>apache-nutch</nutch.checkout.dir>
         <product.parsers.common>${nutch.checkout.dir}/src/product-parsers-common</product.parsers.common>
         <product.parsers>${nutch.checkout.dir}/src/product-parsers</product.parsers>
